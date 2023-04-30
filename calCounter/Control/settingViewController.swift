@@ -9,10 +9,13 @@ import UIKit
 
 class settingViewController: UIViewController {
 
+    @IBOutlet weak var nameTxtField: UITextField!
+    @IBOutlet weak var genderSelectButton: UISegmentedControl!
+    @IBOutlet weak var ageTxtField: UITextField!
+    @IBOutlet weak var weightTextField: UITextField!
+    @IBOutlet weak var heightTxtField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
 }
