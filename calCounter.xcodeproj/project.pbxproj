@@ -13,6 +13,11 @@
 		E34D35DF29FE18BC00F42E58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E34D35DD29FE18BC00F42E58 /* Main.storyboard */; };
 		E34D35E129FE18BF00F42E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E34D35E029FE18BF00F42E58 /* Assets.xcassets */; };
 		E34D35E429FE18BF00F42E58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E34D35E229FE18BF00F42E58 /* LaunchScreen.storyboard */; };
+		E34D35EF29FE2D1E00F42E58 /* addCaloriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35EE29FE2D1E00F42E58 /* addCaloriesViewController.swift */; };
+		E34D35F129FE2D9400F42E58 /* chooseMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35F029FE2D9400F42E58 /* chooseMealViewController.swift */; };
+		E34D35F329FE2DBC00F42E58 /* mealHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35F229FE2DBC00F42E58 /* mealHistoryViewController.swift */; };
+		E34D35F529FE2DD500F42E58 /* settingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35F429FE2DD500F42E58 /* settingViewController.swift */; };
+		E34D35F729FE327900F42E58 /* BMRCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35F629FE327900F42E58 /* BMRCalc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		E34D35E029FE18BF00F42E58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E34D35E329FE18BF00F42E58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E34D35E529FE18BF00F42E58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E34D35EE29FE2D1E00F42E58 /* addCaloriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addCaloriesViewController.swift; sourceTree = "<group>"; };
+		E34D35F029FE2D9400F42E58 /* chooseMealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseMealViewController.swift; sourceTree = "<group>"; };
+		E34D35F229FE2DBC00F42E58 /* mealHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mealHistoryViewController.swift; sourceTree = "<group>"; };
+		E34D35F429FE2DD500F42E58 /* settingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingViewController.swift; sourceTree = "<group>"; };
+		E34D35F629FE327900F42E58 /* BMRCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMRCalc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,44 @@
 		E34D35D629FE18BC00F42E58 /* calCounter */ = {
 			isa = PBXGroup;
 			children = (
-				E34D35D729FE18BC00F42E58 /* AppDelegate.swift */,
+				E34D35ED29FE2C6100F42E58 /* Model */,
+				E34D35EB29FE2C3500F42E58 /* View */,
+				E34D35EC29FE2C4A00F42E58 /* Control */,
 				E34D35D929FE18BC00F42E58 /* SceneDelegate.swift */,
-				E34D35DB29FE18BC00F42E58 /* ViewController.swift */,
-				E34D35DD29FE18BC00F42E58 /* Main.storyboard */,
+				E34D35D729FE18BC00F42E58 /* AppDelegate.swift */,
 				E34D35E029FE18BF00F42E58 /* Assets.xcassets */,
 				E34D35E229FE18BF00F42E58 /* LaunchScreen.storyboard */,
 				E34D35E529FE18BF00F42E58 /* Info.plist */,
 			);
 			path = calCounter;
+			sourceTree = "<group>";
+		};
+		E34D35EB29FE2C3500F42E58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E34D35DD29FE18BC00F42E58 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E34D35EC29FE2C4A00F42E58 /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				E34D35DB29FE18BC00F42E58 /* ViewController.swift */,
+				E34D35EE29FE2D1E00F42E58 /* addCaloriesViewController.swift */,
+				E34D35F029FE2D9400F42E58 /* chooseMealViewController.swift */,
+				E34D35F229FE2DBC00F42E58 /* mealHistoryViewController.swift */,
+				E34D35F429FE2DD500F42E58 /* settingViewController.swift */,
+			);
+			path = Control;
+			sourceTree = "<group>";
+		};
+		E34D35ED29FE2C6100F42E58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E34D35F629FE327900F42E58 /* BMRCalc.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +177,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E34D35EF29FE2D1E00F42E58 /* addCaloriesViewController.swift in Sources */,
+				E34D35F129FE2D9400F42E58 /* chooseMealViewController.swift in Sources */,
 				E34D35DC29FE18BC00F42E58 /* ViewController.swift in Sources */,
+				E34D35F729FE327900F42E58 /* BMRCalc.swift in Sources */,
+				E34D35F329FE2DBC00F42E58 /* mealHistoryViewController.swift in Sources */,
+				E34D35F529FE2DD500F42E58 /* settingViewController.swift in Sources */,
 				E34D35D829FE18BC00F42E58 /* AppDelegate.swift in Sources */,
 				E34D35DA29FE18BC00F42E58 /* SceneDelegate.swift in Sources */,
 			);
