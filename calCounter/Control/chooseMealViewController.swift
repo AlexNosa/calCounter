@@ -8,6 +8,11 @@ import Foundation
 import UIKit
 
 class chooseMealViewController: UIViewController {
+    
+    @IBOutlet weak var BreakfastButtonImg: UIButton!
+    @IBOutlet weak var LunchButtonImg: UIButton!
+    @IBOutlet weak var DinnerButtonImg: UIButton!
+    @IBOutlet weak var SnacksButtonImg: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
