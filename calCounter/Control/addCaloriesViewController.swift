@@ -8,6 +8,11 @@ import Foundation
 import UIKit
 
 class addCaloriesViewController: UIViewController {
+    
+    //add a text field for food name
+    //add a button to find food
+    //add a label to have the number of calories for the food
+    //add a button to add the calories to the array
 
     override func viewDidLoad() {
         super.viewDidLoad()
