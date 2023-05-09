@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4ACE28AD2A08D060004E7D06 /* ApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE28AC2A08D060004E7D06 /* ApiController.swift */; };
-		4ACE28B22A08F320004E7D06 /* Lunch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4ACE28AE2A08F320004E7D06 /* Lunch.jpg */; };
-		4ACE28B32A08F320004E7D06 /* Snacks.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4ACE28AF2A08F320004E7D06 /* Snacks.jpg */; };
-		4ACE28B42A08F320004E7D06 /* Breakfast.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4ACE28B02A08F320004E7D06 /* Breakfast.jpg */; };
-		4ACE28B52A08F320004E7D06 /* Dinner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4ACE28B12A08F320004E7D06 /* Dinner.jpg */; };
 		E34D35D829FE18BC00F42E58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35D729FE18BC00F42E58 /* AppDelegate.swift */; };
 		E34D35DA29FE18BC00F42E58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35D929FE18BC00F42E58 /* SceneDelegate.swift */; };
 		E34D35DC29FE18BC00F42E58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35DB29FE18BC00F42E58 /* ViewController.swift */; };
@@ -27,10 +23,6 @@
 
 /* Begin PBXFileReference section */
 		4ACE28AC2A08D060004E7D06 /* ApiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiController.swift; sourceTree = "<group>"; };
-		4ACE28AE2A08F320004E7D06 /* Lunch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Lunch.jpg; sourceTree = "<group>"; };
-		4ACE28AF2A08F320004E7D06 /* Snacks.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Snacks.jpg; sourceTree = "<group>"; };
-		4ACE28B02A08F320004E7D06 /* Breakfast.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Breakfast.jpg; sourceTree = "<group>"; };
-		4ACE28B12A08F320004E7D06 /* Dinner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dinner.jpg; sourceTree = "<group>"; };
 		E34D35D429FE18BC00F42E58 /* calCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E34D35D729FE18BC00F42E58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E34D35D929FE18BC00F42E58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,17 +49,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4ACE28B72A08F337004E7D06 /* Pictures */ = {
-			isa = PBXGroup;
-			children = (
-				4ACE28B02A08F320004E7D06 /* Breakfast.jpg */,
-				4ACE28B12A08F320004E7D06 /* Dinner.jpg */,
-				4ACE28AE2A08F320004E7D06 /* Lunch.jpg */,
-				4ACE28AF2A08F320004E7D06 /* Snacks.jpg */,
-			);
-			name = Pictures;
-			sourceTree = "<group>";
-		};
 		E34D35CB29FE18BC00F42E58 = {
 			isa = PBXGroup;
 			children = (
@@ -87,7 +68,6 @@
 		E34D35D629FE18BC00F42E58 /* calCounter */ = {
 			isa = PBXGroup;
 			children = (
-				4ACE28B72A08F337004E7D06 /* Pictures */,
 				E34D35ED29FE2C6100F42E58 /* Model */,
 				E34D35EB29FE2C3500F42E58 /* View */,
 				E34D35EC29FE2C4A00F42E58 /* Control */,
@@ -188,11 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E34D35E429FE18BF00F42E58 /* LaunchScreen.storyboard in Resources */,
-				4ACE28B52A08F320004E7D06 /* Dinner.jpg in Resources */,
-				4ACE28B32A08F320004E7D06 /* Snacks.jpg in Resources */,
 				E34D35E129FE18BF00F42E58 /* Assets.xcassets in Resources */,
-				4ACE28B42A08F320004E7D06 /* Breakfast.jpg in Resources */,
-				4ACE28B22A08F320004E7D06 /* Lunch.jpg in Resources */,
 				E34D35DF29FE18BC00F42E58 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
