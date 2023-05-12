@@ -9,6 +9,8 @@ import UIKit
 
 class addCaloriesViewController: UIViewController {
     
+    var mealType: String = ""
+    @IBOutlet weak var mealTypeLabel: UILabel!
     //add a text field for food name
     //add a button to find food
     //add a label to have the number of calories for the food
@@ -16,6 +18,10 @@ class addCaloriesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mealTypeLabel.text = mealType
+        
+        
         // Do any additional setup after loading the view.
     }
 //get the calories using this call

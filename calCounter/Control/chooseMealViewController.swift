@@ -14,14 +14,40 @@ class chooseMealViewController: UIViewController {
     @IBOutlet weak var DinnerButtonImg: UIButton!
     @IBOutlet weak var SnacksButtonImg: UIButton!
 
+    @IBAction func touchUpLunch(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(identifier: "addCaloriesViewController") as! addCaloriesViewController
+        vc.mealType = "Lunch"
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func touchUpBreakfast(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "addCaloriesViewController") as! addCaloriesViewController
+        vc.mealType = "Breakfast"
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    @IBAction func touchUpDinner(_ sender: Any) {
+        
+        let vc = storyboard?.instantiateViewController(identifier: "addCaloriesViewController") as! addCaloriesViewController
+        vc.mealType = "Dinner"
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+
+    
+    @IBAction func touchUpSnacks(_ sender: Any) {
+        
+        let vc = storyboard?.instantiateViewController(identifier: "addCaloriesViewController") as! addCaloriesViewController
+        vc.mealType = "Snacks"
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        BreakfastButtonImg.setImage(UIImage(named: "Breakfast"), for: .normal)
-        LunchButtonImg.setImage(UIImage(named: "Lunch"), for: .normal)
-        DinnerButtonImg.setImage(UIImage(named: "Dinner"), for: .normal)
-        SnacksButtonImg.setImage(UIImage(named: "Snacks"), for: .normal)
+
     }
+    
     //amend this to the correct views
 //    @IBAction func mealButtonTapped(_ sender: UIButton) {
 //        var destinationViewControllerIdentifier = ""
