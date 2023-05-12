@@ -17,5 +17,15 @@ class settingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                    
+        }
+    override func prepare(for segue: UIStoryboardSegue, sender:Any?){
+        if segue.identifier == "saveData"{
+            let VC = segue.destination as! ViewController
+            VC.weight = Double(weightTextField.text!) ?? 0.0
+            VC.height = Double(heightTxtField.text!) ?? 0.0
+            VC.age = Int(ageTxtField.text!) ?? 0
+            VC.gender = genderSelectButton.selectedSegmentIndex            }
+
     }
 }
