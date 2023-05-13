@@ -13,7 +13,7 @@ class BMRCalc{
     var weightInKilograms: Double = 0.0
     var heightInCM: Double = 0.0
     var ageInYears: Int = 0
-    var gender: String = ""
+    var gender:Int = 0
     
     func calculateBMR() -> Int {
         var bmr = 0.0
@@ -21,14 +21,14 @@ class BMRCalc{
         var heightCalc = 0.0
         var ageCalc = 0.0
         
-        if gender == "Female"{
+        if gender == 1 { // gender is female
             weightCalc = 9.247 * weightInKilograms
             heightCalc = 3.098 * heightInCM
             ageCalc = 4.330 * Double(ageInYears)
             
             bmr = 447.593 + weightCalc + heightCalc - ageCalc
             
-        }else{
+        }else{ // gender is male
             weightCalc = 13.397 * weightInKilograms
             heightCalc = 4.799 * heightInCM
             ageCalc = 5.677 * Double(ageInYears)
@@ -36,9 +36,5 @@ class BMRCalc{
             bmr = 88.362 + weightCalc + heightCalc - ageCalc
         }
         return Int(bmr)
-    }
-    func remainingCalories(goalCalories: Int, consumedCalories: Int) -> Int{
-        let remainingCalories = max(goalCalories - consumedCalories, 0)
-        return remainingCalories
     }
 }
