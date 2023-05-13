@@ -337,22 +337,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breakfast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fb1-4E-SAH">
-                                <rect key="frame" x="148" y="94" width="94" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="157" y="94" width="76.333333333333314" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.62418555809999998" green="0.63036561310000006" blue="0.63036561310000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of Calories" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wao-4E-T8x">
-                                <rect key="frame" x="95" y="236" width="200" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="46f-9g-sTw"/>
-                                </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hh-oy-Lyr">
-                                <rect key="frame" x="125.66666666666669" y="496" width="139" height="38"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hh-oy-Lyr">
+                                <rect key="frame" x="126" y="661" width="139" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Add Calories">
                                     <backgroundConfiguration key="background">
@@ -362,29 +354,48 @@
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Food" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Rz-wg-rd1">
-                                <rect key="frame" x="95" y="162" width="200" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="R0Y-zX-dpI"/>
-                                </constraints>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Food" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Rz-wg-rd1">
+                                <rect key="frame" x="30" y="173" width="288" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. 3" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ivT-wH-Bcd">
+                                <rect key="frame" x="30" y="597" width="288" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter food name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6N-Of-pNz">
+                                <rect key="frame" x="30" y="147" width="118" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of servings:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5s-Ai-cIq">
+                                <rect key="frame" x="30" y="571" width="139" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Chicken Nutrition Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNg-JI-CbH">
+                                <rect key="frame" x="95" y="236" width="201" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="szy-Ms-i9p"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="szy-Ms-i9p" firstAttribute="bottom" secondItem="5hh-oy-Lyr" secondAttribute="bottom" constant="300" id="2bo-FJ-bew"/>
-                            <constraint firstItem="Wao-4E-T8x" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="7tu-BJ-Og4"/>
-                            <constraint firstItem="5hh-oy-Lyr" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="R4b-hO-QSO"/>
                             <constraint firstItem="Gp6-ss-Bqw" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="TNf-GG-hXb"/>
-                            <constraint firstItem="Wao-4E-T8x" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="Tob-NO-aOW"/>
                             <constraint firstItem="fb1-4E-SAH" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="V28-sa-1vg"/>
-                            <constraint firstItem="Wao-4E-T8x" firstAttribute="top" secondItem="3Rz-wg-rd1" secondAttribute="bottom" constant="40" id="bbt-Bb-5Aw"/>
                             <constraint firstItem="fb1-4E-SAH" firstAttribute="top" secondItem="Gp6-ss-Bqw" secondAttribute="bottom" constant="11" id="dEV-5K-NeD"/>
-                            <constraint firstItem="3Rz-wg-rd1" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="gM0-ng-dsl"/>
-                            <constraint firstItem="3Rz-wg-rd1" firstAttribute="top" secondItem="fb1-4E-SAH" secondAttribute="bottom" constant="40" id="pRu-mX-7UI"/>
                             <constraint firstItem="Gp6-ss-Bqw" firstAttribute="top" secondItem="szy-Ms-i9p" secondAttribute="top" constant="41" id="xZI-AU-JfX"/>
                         </constraints>
                     </view>
@@ -395,7 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PFR-47-lls" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1917" y="49"/>
+            <point key="canvasLocation" x="1916.9230769230769" y="48.341232227488149"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="o80-rP-bbl">
@@ -414,21 +425,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5sC-6b-v4X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-903.05343511450383" y="48.591549295774648"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="ALM-y1-bpG">
-            <objects>
-                <viewController id="BSb-Sa-eWr" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yNb-tY-20S">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="lVx-o4-53D"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w1x-Vc-Bk7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="143" y="-799"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
