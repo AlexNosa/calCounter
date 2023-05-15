@@ -1,8 +1,7 @@
-//  chooseMealViewController.swift
-//  calCounter
+// chooseMealViewController.swift
+// calCounter
 //
-//  Created by Alex Nosatti on 30/4/2023.
-//
+// Created by Alex Nosatti on 30/4/2023.
 
 import Foundation
 import UIKit
@@ -13,44 +12,55 @@ class chooseMealViewController: UIViewController {
     @IBOutlet weak var LunchButtonImg: UIButton!
     @IBOutlet weak var DinnerButtonImg: UIButton!
     @IBOutlet weak var SnacksButtonImg: UIButton!
+    
+    var selectedMealType: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        BreakfastButtonImg.setImage(UIImage(named: "Breakfast"), for: .normal)
-        LunchButtonImg.setImage(UIImage(named: "Lunch"), for: .normal)
-        DinnerButtonImg.setImage(UIImage(named: "Dinner"), for: .normal)
-        SnacksButtonImg.setImage(UIImage(named: "Snacks"), for: .normal)
+        
+        // Configure button title properties
+        let buttonArray = [BreakfastButtonImg, LunchButtonImg, DinnerButtonImg, SnacksButtonImg]
+        for button in buttonArray {
+            button?.setTitleColor(UIColor.white, for: .normal) // Change the text color
+            button?.titleLabel?.shadowColor = UIColor.black // Add a text shadow
+            button?.titleLabel?.shadowOffset = CGSize(width: -1, height: 1)
+            button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16) // Increase the font size
+        }
+        
+        // Set up button tags
+        BreakfastButtonImg.tag = 1
+        LunchButtonImg.tag = 2
+        DinnerButtonImg.tag = 3
+        SnacksButtonImg.tag = 4
+        
+        // Set up button actions
+        BreakfastButtonImg.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
+        LunchButtonImg.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
+        DinnerButtonImg.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
+        SnacksButtonImg.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
     }
-    //amend this to the correct views
-//    @IBAction func mealButtonTapped(_ sender: UIButton) {
-//        var destinationViewControllerIdentifier = ""
-//
-//        switch sender {
-//        case BreakfastButtonImg:
-//            destinationViewControllerIdentifier = "BreakfastViewController"
-//        case LunchButtonImg:
-//            destinationViewControllerIdentifier = "LunchViewController"
-//        case DinnerButtonImg:
-//            destinationViewControllerIdentifier = "DinnerViewController"
-//        case SnacksButtonImg:
-//            destinationViewControllerIdentifier = "SnacksViewController"
-//        default:
-//            print("Unknown button")
-//            return
-//        }
-//
-//        let destinationViewController = self.storyboard?.instantiateViewController(withIdentifier: destinationViewControllerIdentifier)
-//        if let destinationViewController = destinationViewController {
-//            self.present(destinationViewController, animated: true, completion: nil)
-//        }
-//    }
     
-//    @IBAction func homeButtonTapped(_ sender: UIButton) {
-//        let destinationView = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-//        present(destinationView, animated: true, completion: nil)
-//    }
-
-
-
+    @IBAction func mealButtonClicked(_ sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            selectedMealType = "Breakfast"
+        case 2:
+            selectedMealType = "Lunch"
+        case 3:
+            selectedMealType = "Dinner"
+        case 4:
+            selectedMealType = "Snacks"
+        default:
+            break
+        }
+        performSegue(withIdentifier: "segueToAddCaloriesVC", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToAddCaloriesVC" {
+            let destinationVC = segue.destination as! addCaloriesViewController
+            destinationVC.mealType = selectedMealType
+        }
+    }
 }
