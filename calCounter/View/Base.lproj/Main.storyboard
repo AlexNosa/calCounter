@@ -316,7 +316,7 @@
                         <outlet property="dinnerButton" destination="3Te-8d-2LO" id="k4a-3T-sOi"/>
                         <outlet property="lunchButton" destination="foe-Le-KVz" id="Lqj-05-iqu"/>
                         <outlet property="snackButton" destination="VsV-zn-Jid" id="f5P-tK-FVT"/>
-                        <segue destination="WRI-TG-x9a" kind="show" id="sOr-tG-axg"/>
+                        <segue destination="WRI-TG-x9a" kind="show" identifier="segueToAddCaloriesVC" id="sOr-tG-axg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wjD-VN-5rR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
