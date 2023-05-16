@@ -11,74 +11,88 @@ class addCaloriesViewController: UIViewController {
     
     var mealType: String?
     //this is the segue from choosing meal so set the top label to this value
-    @IBOutlet weak var foodNameTextField: UITextField!
-    @IBOutlet weak var caloriesLabel: UILabel!
 
+    @IBOutlet weak var nutrientTableView: UITableView!
+    @IBOutlet weak var foodNameTextField: UITextField!
+    @IBOutlet weak var foodNameLabel: UILabel!
+    @IBOutlet weak var mealTypeLabel: UILabel!
+    @IBOutlet weak var searchFood: UIButton!
+    
+    
     struct Food: Codable {
         let items: [Item]
         
         struct Item: Codable {
             let name: String
             let calories: Double
+            let proteins: Double
+            let fat: Double
+            let sugars: Double
         }
     }
     
+    var foodItems: [Food.Item] = []
     
-    @IBOutlet weak var mealTypeLabel: UILabel!
-    //add a text field for food name
-    //add a button to find food: Here is where you have a method to run the api and set the data to the textfield of information
-    //add a label to have the number of calories for the food
-    //add a button to add the calories to the array
-    // add a text field to set the value of all the food items in api call
-    
-    //add a text field for food name
-    //add a button to find food
-    //add a label to have the number of calories for the food
-    //add a button to add the calories to the array
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mealTypeLabel.text = mealType
-        
-        
-        // Do any additional setup after loading the view.
+        nutrientTableView.dataSource = self
+        foodNameLabel.text = ""
     }
+    
     @IBAction func findFoodButtonTapped(_ sender: Any) {
         guard let foodName = foodNameTextField.text else { return }
+        foodNameLabel.text = "\(foodName) Nutritional Information"
         fetchFood(for: foodName) { [weak self] data in
             DispatchQueue.main.async {
-                self?.caloriesLabel.text = data
-                //set the text here || separate for food info label and calories label
+                if let data = data {
+                    self?.foodItems.append(data)
+                    self?.nutrientTableView.reloadData()
+                } else {
+                    // Handle error case
+                }
             }
         }
     }
-    //Api call to find the food and calories using struct
-    func fetchFood(for food: String, completion: @escaping (String?) -> Void) {
+    
+    // Api call to find the food and calories using struct
+    func fetchFood(for food: String, completion: @escaping (Food.Item?) -> Void) {
         guard let query = food.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         let url = URL(string: "https://api.calorieninjas.com/v1/nutrition?query=" + query)!
         var request = URLRequest(url: url)
-            request.setValue("eHLXvaQ8P8N40UMSrZh85A==78XyI3BrPnl7SE6n", forHTTPHeaderField: "X-Api-Key")
-            let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
+        request.setValue("eHLXvaQ8P8N40UMSrZh85A==78XyI3BrPnl7SE6n", forHTTPHeaderField: "X-Api-Key")
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 completion(nil)
                 return
             }
-                do {
-                    let decoder = JSONDecoder()
-                    let foodData = try decoder.decode(Food.self, from: data)
-                    if let calories = foodData.items.first?.calories {
-                        completion(String(calories)) // Convert the Double to a String
-                        //set the calories to the textfield value
-                    } else {
-                        completion(nil)
-                    }
-                } catch {
-                    print("Error decoding JSON: \(error)")
+            do {
+                let decoder = JSONDecoder()
+                let foodData = try decoder.decode(Food.self, from: data)
+                if let item = foodData.items.first {
+                    completion(item)
+                } else {
                     completion(nil)
                 }
+            } catch {
+                print("Error decoding JSON: \(error)")
+                completion(nil)
             }
-            task.resume()
+        }
+        task.resume()
     }
+}
 
+extension addCaloriesViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return foodItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FoodCell", for: indexPath)
+        let food = foodItems[indexPath.row]
+        cell.textLabel?.text = food.name
+        cell.detailTextLabel?.text = "Calories: \(food.calories), Proteins: \(food.proteins), Fat: \(food.fat), Sugars: \(food.sugars)"
+        return cell
+    }
 }
