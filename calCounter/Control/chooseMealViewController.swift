@@ -9,10 +9,10 @@ import UIKit
 
 class chooseMealViewController: UIViewController {
     
-    @IBOutlet weak var BreakfastButtonImg: UIButton!
-    @IBOutlet weak var LunchButtonImg: UIButton!
-    @IBOutlet weak var DinnerButtonImg: UIButton!
-    @IBOutlet weak var SnacksButtonImg: UIButton!
+    @IBOutlet weak var breakfastButton: UIButton!
+    @IBOutlet weak var lunchButton: UIButton!
+    @IBOutlet weak var dinnerButton: UIButton!
+    @IBOutlet weak var snackButton: UIButton!
     
     var selectedMealType: String?
     
@@ -20,7 +20,7 @@ class chooseMealViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // Configure button title properties
-        let buttonArray = [BreakfastButtonImg, LunchButtonImg, DinnerButtonImg, SnacksButtonImg]
+        let buttonArray = [breakfastButton, lunchButton, dinnerButton, snackButton]
         for button in buttonArray {
             button?.setTitleColor(UIColor.white, for: .normal) // Change the text color
             button?.titleLabel?.shadowColor = UIColor.black // Add a text shadow
@@ -29,16 +29,16 @@ class chooseMealViewController: UIViewController {
         }
         
         // Set up button tags
-        BreakfastButtonImg.tag = 1
-        LunchButtonImg.tag = 2
-        DinnerButtonImg.tag = 3
-        SnacksButtonImg.tag = 4
+        breakfastButton.tag = 1
+        lunchButton.tag = 2
+        dinnerButton.tag = 3
+        snackButton.tag = 4
         
         // Set up button actions
-        BreakfastButtonImg.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
-        LunchButtonImg.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
-        DinnerButtonImg.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
-        SnacksButtonImg.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
+        breakfastButton.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
+        lunchButton.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
+        dinnerButton.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
+        snackButton.addTarget(self, action: #selector(mealButtonClicked(_:)), for: .touchUpInside)
     }
     @IBAction func mealButtonClicked(_ sender: UIButton) {
         switch sender.tag {
