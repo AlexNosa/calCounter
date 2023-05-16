@@ -18,20 +18,23 @@ class addCaloriesViewController: UIViewController {
     @IBOutlet weak var mealTypeLabel: UILabel!
     @IBOutlet weak var searchFood: UIButton!
     
-    
-    struct Food: Codable {
-        let items: [Item]
         
-        struct Item: Codable {
+        struct Food: Codable {
             let name: String
             let calories: Double
-            let proteins: Double
-            let fat: Double
-            let sugars: Double
-        }
+            let servingSizeG: Double
+            let fatTotalG: Double
+            let fatSaturatedG: Double
+            let proteinG: Double
+            let sodiumMg: Int
+            let potassiumMg: Int
+            let cholesterolMg: Int
+            let carbohydratesTotalG: Double
+            let fiberG: Double
+            let sugarG: Double
     }
     
-    var foodItems: [Food.Item] = []
+    var foodItems: [Food] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +59,7 @@ class addCaloriesViewController: UIViewController {
     }
     
     // Api call to find the food and calories using struct
-    func fetchFood(for food: String, completion: @escaping (Food.Item?) -> Void) {
+    func fetchFood(for food: String, completion: @escaping (Food?) -> Void) {
         guard let query = food.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         let url = URL(string: "https://api.calorieninjas.com/v1/nutrition?query=" + query)!
         var request = URLRequest(url: url)
@@ -67,12 +70,33 @@ class addCaloriesViewController: UIViewController {
                 return
             }
             do {
-                let decoder = JSONDecoder()
-                let foodData = try decoder.decode(Food.self, from: data)
-                if let item = foodData.items.first {
-                    completion(item)
-                } else {
-                    completion(nil)
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    if let items = json["items"] as? [[String: Any]] {
+                        var foodItems = [Food]()
+                        for item in items {
+                            let foodItem = Food(
+                                name: item["name"] as? String ?? "",
+                                calories: item["calories"] as? Double ?? 0.0,
+                                servingSizeG: item["serving_size_g"] as? Double ?? 0.0,
+                                fatTotalG: item["fat_total_g"] as? Double ?? 0.0,
+                                fatSaturatedG: item["fat_saturated_g"] as? Double ?? 0.0,
+                                proteinG: item["protein_g"] as? Double ?? 0.0,
+                                sodiumMg: item["sodium_mg"] as? Int ?? 0,
+                                potassiumMg: item["potassium_mg"] as? Int ?? 0,
+                                cholesterolMg: item["cholesterol_mg"] as? Int ?? 0,
+                                carbohydratesTotalG: item["carbohydrates_total_g"] as? Double ?? 0.0,
+                                fiberG: item["fiber_g"] as? Double ?? 0.0,
+                                sugarG: item["sugar_g"] as? Double ?? 0.0
+                            )
+                            foodItems.append(foodItem)
+                        }
+                        // foodItems is an array of FoodItem objects representing each item in the response.
+                        //access the properties for each item. example:
+//                        for foodItem in foodItems {
+//                            print(foodItem.name)
+//                            print(foodItem.calories)
+//                        }
+                    }
                 }
             } catch {
                 print("Error decoding JSON: \(error)")
@@ -92,7 +116,7 @@ extension addCaloriesViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoodCell", for: indexPath)
         let food = foodItems[indexPath.row]
         cell.textLabel?.text = food.name
-        cell.detailTextLabel?.text = "Calories: \(food.calories), Proteins: \(food.proteins), Fat: \(food.fat), Sugars: \(food.sugars)"
+        cell.detailTextLabel?.text = "Calories: \(food.calories), Proteins: \(food.proteinG), Fat: \(food.fatTotalG), Sugars: \(food.sugarG)"
         return cell
     }
 }
