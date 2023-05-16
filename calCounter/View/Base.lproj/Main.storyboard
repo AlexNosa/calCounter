@@ -323,15 +323,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAv-o0-WGJ">
-                                <rect key="frame" x="30" y="103" width="352" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Calories" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gp6-ss-Bqw">
-                                <rect key="frame" x="87.333333333333329" y="41" width="215.66666666666669" height="42"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Calories" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Gp6-ss-Bqw">
+                                <rect key="frame" x="87" y="41" width="216" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="215.66999999999999" id="b6n-yx-Gh8"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -352,6 +348,9 @@
                                     <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="20"/>
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="onTouchAddCalories:" destination="WRI-TG-x9a" eventType="touchUpInside" id="6gi-z4-wzx"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Food" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Rz-wg-rd1">
                                 <rect key="frame" x="45" y="173" width="300" height="34"/>
@@ -361,15 +360,21 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editedEndFood:" destination="WRI-TG-x9a" eventType="editingDidEnd" id="coc-1U-aBE"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. 3" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ivT-wH-Bcd">
                                 <rect key="frame" x="45" y="597" width="300" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="sK4-AG-pGy"/>
                                 </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="inputControl:" destination="WRI-TG-x9a" eventType="editingChanged" id="X17-xZ-zVp"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter food name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6N-Of-pNz">
                                 <rect key="frame" x="30" y="147" width="118" height="18"/>
@@ -389,31 +394,48 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cals." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPd-sc-BqW">
+                                <rect key="frame" x="170" y="262" width="50" height="20.333333333333314"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="YBd-MI-Eh2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="szy-Ms-i9p"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ivT-wH-Bcd" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="04l-Ul-YJJ"/>
-                            <constraint firstItem="U6N-Of-pNz" firstAttribute="top" secondItem="Gp6-ss-Bqw" secondAttribute="bottom" constant="64" id="2rj-Zl-ZSf"/>
-                            <constraint firstItem="3Rz-wg-rd1" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="8U8-7Q-wDd"/>
-                            <constraint firstItem="U6N-Of-pNz" firstAttribute="leading" secondItem="szy-Ms-i9p" secondAttribute="leading" constant="30" id="Bck-jI-RdT"/>
-                            <constraint firstItem="ivT-wH-Bcd" firstAttribute="top" secondItem="b5s-Ai-cIq" secondAttribute="bottom" constant="8" id="ONj-Ib-lrz"/>
-                            <constraint firstItem="Gp6-ss-Bqw" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="TNf-GG-hXb"/>
-                            <constraint firstItem="fb1-4E-SAH" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="V28-sa-1vg"/>
-                            <constraint firstItem="3Rz-wg-rd1" firstAttribute="top" secondItem="U6N-Of-pNz" secondAttribute="bottom" constant="8" id="alh-C0-xEp"/>
-                            <constraint firstItem="fb1-4E-SAH" firstAttribute="top" secondItem="Gp6-ss-Bqw" secondAttribute="bottom" constant="11" id="dEV-5K-NeD"/>
-                            <constraint firstItem="5hh-oy-Lyr" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="jBp-c7-CuQ"/>
-                            <constraint firstItem="5hh-oy-Lyr" firstAttribute="top" secondItem="Gp6-ss-Bqw" secondAttribute="bottom" constant="578" id="mAI-4F-lqK"/>
-                            <constraint firstItem="KNg-JI-CbH" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="oq3-At-noh"/>
-                            <constraint firstItem="b5s-Ai-cIq" firstAttribute="leading" secondItem="szy-Ms-i9p" secondAttribute="leading" constant="30" id="r3k-Ro-bTS"/>
-                            <constraint firstItem="Gp6-ss-Bqw" firstAttribute="top" secondItem="szy-Ms-i9p" secondAttribute="top" constant="41" id="xZI-AU-JfX"/>
-                            <constraint firstItem="KNg-JI-CbH" firstAttribute="top" secondItem="3Rz-wg-rd1" secondAttribute="bottom" constant="29" id="xtv-gU-kEi"/>
-                            <constraint firstItem="b5s-Ai-cIq" firstAttribute="top" secondItem="U6N-Of-pNz" secondAttribute="bottom" constant="406" id="yAY-Nc-Xnj"/>
+                            <constraint firstItem="ivT-wH-Bcd" firstAttribute="top" secondItem="b5s-Ai-cIq" secondAttribute="bottom" constant="8" id="4dh-Tg-6HW"/>
+                            <constraint firstItem="WPd-sc-BqW" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="8UV-44-a4e"/>
+                            <constraint firstItem="3Rz-wg-rd1" firstAttribute="top" secondItem="fb1-4E-SAH" secondAttribute="bottom" constant="57.329999999999998" id="F3P-wl-Kgu"/>
+                            <constraint firstItem="5hh-oy-Lyr" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="HGQ-NS-0e4"/>
+                            <constraint firstItem="Gp6-ss-Bqw" firstAttribute="top" secondItem="szy-Ms-i9p" secondAttribute="top" constant="41" id="MBd-yC-BAS"/>
+                            <constraint firstItem="KNg-JI-CbH" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="Pa1-gk-hpN"/>
+                            <constraint firstItem="b5s-Ai-cIq" firstAttribute="top" secondItem="U6N-Of-pNz" secondAttribute="bottom" constant="406" id="S9r-qO-I7w"/>
+                            <constraint firstItem="U6N-Of-pNz" firstAttribute="leading" secondItem="szy-Ms-i9p" secondAttribute="leading" constant="30" id="WUI-ep-nT0"/>
+                            <constraint firstItem="KNg-JI-CbH" firstAttribute="top" secondItem="3Rz-wg-rd1" secondAttribute="bottom" constant="29" id="WXO-os-zxb"/>
+                            <constraint firstItem="Gp6-ss-Bqw" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="bHI-zM-bJs"/>
+                            <constraint firstItem="3Rz-wg-rd1" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="cno-GH-xVr"/>
+                            <constraint firstItem="WPd-sc-BqW" firstAttribute="top" secondItem="3Rz-wg-rd1" secondAttribute="bottom" constant="55" id="dLc-UA-Pnm"/>
+                            <constraint firstItem="5hh-oy-Lyr" firstAttribute="top" secondItem="ivT-wH-Bcd" secondAttribute="bottom" constant="30" id="dS1-zm-2ce"/>
+                            <constraint firstItem="U6N-Of-pNz" firstAttribute="top" secondItem="szy-Ms-i9p" secondAttribute="top" constant="147" id="mKJ-6q-QDA"/>
+                            <constraint firstItem="b5s-Ai-cIq" firstAttribute="leading" secondItem="szy-Ms-i9p" secondAttribute="leading" constant="30" id="pkm-Ie-LHr"/>
+                            <constraint firstItem="3Rz-wg-rd1" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="sSI-t6-alr"/>
+                            <constraint firstItem="ivT-wH-Bcd" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="suw-US-lIF"/>
+                            <constraint firstItem="fb1-4E-SAH" firstAttribute="top" secondItem="Gp6-ss-Bqw" secondAttribute="bottom" constant="11" id="tZP-6q-Kjq"/>
+                            <constraint firstItem="fb1-4E-SAH" firstAttribute="centerX" secondItem="0Ye-2w-6Ar" secondAttribute="centerX" id="vKb-Y6-R34"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="krR-YX-57l"/>
                     <connections>
+                        <outlet property="FoodNameLabel" destination="KNg-JI-CbH" id="sw3-YW-QH5"/>
+                        <outlet property="addCaloriesButton" destination="5hh-oy-Lyr" id="GTV-4g-A6q"/>
+                        <outlet property="caloriesLabel" destination="WPd-sc-BqW" id="fwi-lG-1pa"/>
+                        <outlet property="foodNameTextField" destination="3Rz-wg-rd1" id="qYS-6t-7PX"/>
                         <outlet property="mealTypeLabel" destination="fb1-4E-SAH" id="yTw-R6-D6M"/>
+                        <outlet property="servingNumberTextField" destination="ivT-wH-Bcd" id="2UR-sM-05v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PFR-47-lls" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
