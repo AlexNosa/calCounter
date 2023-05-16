@@ -9,74 +9,45 @@ import UIKit
 
 class chooseMealViewController: UIViewController {
     
-    @IBOutlet weak var BreakfastButtonImg: UIButton!
-    @IBOutlet weak var LunchButtonImg: UIButton!
-    @IBOutlet weak var DinnerButtonImg: UIButton!
-    @IBOutlet weak var SnacksButtonImg: UIButton!
-
-    @IBAction func touchUpLunch(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "addCaloriesViewController") as! addCaloriesViewController
-        vc.mealType = "Lunch"
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
     
-    @IBAction func touchUpBreakfast(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(identifier: "addCaloriesViewController") as! addCaloriesViewController
-        vc.mealType = "Breakfast"
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-    }
-    @IBAction func touchUpDinner(_ sender: Any) {
-        
-        let vc = storyboard?.instantiateViewController(identifier: "addCaloriesViewController") as! addCaloriesViewController
-        vc.mealType = "Dinner"
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-    }
-
     
-    @IBAction func touchUpSnacks(_ sender: Any) {
-        
-        let vc = storyboard?.instantiateViewController(identifier: "addCaloriesViewController") as! addCaloriesViewController
-        vc.mealType = "Snacks"
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+    
+    @IBOutlet weak var breakfastButton: UIButton!
+    
+    @IBOutlet weak var lunchButton: UIButton!
+    
+    @IBOutlet weak var dinnerButton: UIButton!
+    
+    @IBOutlet weak var snackButton: UIButton!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    }
 
+    @IBAction func addBreakfast(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "addCaloriesViewController") as! addCaloriesViewController
+        vc.mealType = "Breakfast"
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    @IBAction func addLunch(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "addCaloriesViewController") as! addCaloriesViewController
+        vc.mealType = "Lunch"
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    @IBAction func addDinner(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "addCaloriesViewController") as! addCaloriesViewController
+        vc.mealType = "Dinner"
+        navigationController?.pushViewController(vc, animated: true)
     }
     
-    //amend this to the correct views
-//    @IBAction func mealButtonTapped(_ sender: UIButton) {
-//        var destinationViewControllerIdentifier = ""
-//
-//        switch sender {
-//        case BreakfastButtonImg:
-//            destinationViewControllerIdentifier = "BreakfastViewController"
-//        case LunchButtonImg:
-//            destinationViewControllerIdentifier = "LunchViewController"
-//        case DinnerButtonImg:
-//            destinationViewControllerIdentifier = "DinnerViewController"
-//        case SnacksButtonImg:
-//            destinationViewControllerIdentifier = "SnacksViewController"
-//        default:
-//            print("Unknown button")
-//            return
-//        }
-//
-//        let destinationViewController = self.storyboard?.instantiateViewController(withIdentifier: destinationViewControllerIdentifier)
-//        if let destinationViewController = destinationViewController {
-//            self.present(destinationViewController, animated: true, completion: nil)
-//        }
-//    }
-    
-//    @IBAction func homeButtonTapped(_ sender: UIButton) {
-//        let destinationView = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-//        present(destinationView, animated: true, completion: nil)
-//    }
-
-
-
+    @IBAction func addSnack(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "addCaloriesViewController") as! addCaloriesViewController
+        vc.mealType = "Snacks"
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
