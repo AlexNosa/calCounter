@@ -11,27 +11,27 @@ class addCaloriesViewController: UIViewController {
     
     var mealType: String?
     //this is the segue from choosing meal so set the top label to this value
-
+    
     @IBOutlet weak var nutrientTableView: UITableView!
     @IBOutlet weak var foodNameTextField: UITextField!
     @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var mealTypeLabel: UILabel!
     @IBOutlet weak var searchFood: UIButton!
     
-        
-        struct Food: Codable {
-            let name: String
-            let calories: Double
-            let servingSizeG: Double
-            let fatTotalG: Double
-            let fatSaturatedG: Double
-            let proteinG: Double
-            let sodiumMg: Int
-            let potassiumMg: Int
-            let cholesterolMg: Int
-            let carbohydratesTotalG: Double
-            let fiberG: Double
-            let sugarG: Double
+    
+    struct Food: Codable {
+        let name: String
+        let calories: Double
+        let servingSizeG: Double
+        let fatTotalG: Double
+        let fatSaturatedG: Double
+        let proteinG: Double
+        let sodiumMg: Int
+        let potassiumMg: Int
+        let cholesterolMg: Int
+        let carbohydratesTotalG: Double
+        let fiberG: Double
+        let sugarG: Double
     }
     
     var foodItems: [Food] = []
@@ -65,13 +65,21 @@ class addCaloriesViewController: UIViewController {
         var request = URLRequest(url: url)
         request.setValue("eHLXvaQ8P8N40UMSrZh85A==78XyI3BrPnl7SE6n", forHTTPHeaderField: "X-Api-Key")
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error with the request: \(error)")
+                completion(nil)
+                return
+            }
             guard let data = data else {
+                print("No data returned from the request.")
                 completion(nil)
                 return
             }
             do {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    print("JSON successfully parsed.")
                     if let items = json["items"] as? [[String: Any]] {
+                        print("\"items\" array successfully extracted from JSON.")
                         var foodItems = [Food]()
                         for item in items {
                             let foodItem = Food(
@@ -90,13 +98,16 @@ class addCaloriesViewController: UIViewController {
                             )
                             foodItems.append(foodItem)
                         }
-                        // foodItems is an array of FoodItem objects representing each item in the response.
-                        //access the properties for each item. example:
-//                        for foodItem in foodItems {
-//                            print(foodItem.name)
-//                            print(foodItem.calories)
-//                        }
+                        // Printing details of each food item.
+                        for foodItem in foodItems {
+                            print("Food Name: \(foodItem.name)")
+                            print("Calories: \(foodItem.calories)")
+                        }
+                    } else {
+                        print("Unable to extract \"items\" array from JSON.")
                     }
+                } else {
+                    print("Unable to parse JSON.")
                 }
             } catch {
                 print("Error decoding JSON: \(error)")
