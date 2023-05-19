@@ -45,7 +45,6 @@ class addCaloriesViewController: UIViewController {
     // Instantiate the FoodData class
     private var foodData = FoodData()
     
-//    @IBOutlet weak var nutrientTableView: UITableView!
     @IBOutlet weak var foodNameTextField: UITextField!
     @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var mealTypeLabel: UILabel!
@@ -177,6 +176,14 @@ class addCaloriesViewController: UIViewController {
     @IBAction func addCaloriesButtonTapped(_ sender: UIButton) {
         let total = calculateTotals()
         guard let servingsText = servings.text, let servingsValue = Double(servingsText) else { return }
+        
+        let meal = Meal(
+            foodName: total.finalFoodName ?? "",
+            mealType: mealTypeLabel.text ?? "",
+            calories: total.totalCalories * servingsValue
+            )
+        
+        MealHistory.shared.addMeal(meal)
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let dashBoardVC = storyboard.instantiateViewController(identifier: "dashBoardViewController") as! dashBoardViewController
@@ -193,22 +200,23 @@ class addCaloriesViewController: UIViewController {
 
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToDashBoardViewController", let nextVC = segue.destination as?
-        dashBoardViewController {
+        let total = calculateTotals()
+        guard let servingsText = servings.text, let servingsValue = Double(servingsText) else { return }
 
-            let total = calculateTotals()
-
-            guard let servingsText = servings.text, let servingsValue = Double(servingsText) else { return }
-
-            // Pass the values
+        if segue.identifier == "segueToDashBoardViewController", let nextVC = segue.destination as? dashBoardViewController {
             nextVC.foodName = total.finalFoodName
             nextVC.servings = servingsValue
             nextVC.calories = total.totalCalories*servingsValue
             nextVC.protein = total.totalProteinG
             nextVC.fat = total.totalFatTotalG
             nextVC.sugar = total.totalSugarG
+        } else if segue.identifier == "segueToMealHistoryViewController", let nextVC = segue.destination as? mealHistoryViewController {
+            nextVC.foodName = total.finalFoodName
+            nextVC.mealType = mealTypeLabel.text
+            nextVC.calories = total.totalCalories*servingsValue
         }
     }
+
 
 }
 
