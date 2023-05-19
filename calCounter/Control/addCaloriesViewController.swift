@@ -7,72 +7,119 @@
 import Foundation
 import UIKit
 
+// Declare a class that conforms to the ObservableObject protocol
+class FoodData: ObservableObject {
+    @Published var foodItems: [FoodItem] = []
+}
+struct TotalFoodItem: Codable {
+    let totalCalories: Double
+    let totalFatTotalG: Double
+    let totalProteinG: Double
+    let totalSugarG: Double
+}
+
+struct FoodItem: Codable {
+    let name: String
+    let calories: Double
+//    let servingSizeG: Double
+    let fatTotalG: Double
+//    let fatSaturatedG: Double
+    let proteinG: Double
+//    let sodiumMg: Int
+//    let potassiumMg: Int
+//    let cholesterolMg: Int
+//    let carbohydratesTotalG: Double
+//    let fiberG: Double
+    let sugarG: Double
+}
+struct ApiResponse: Codable {
+    let items: [FoodItem]
+}
+
 class addCaloriesViewController: UIViewController {
     
     var mealType: String?
     //this is the segue from choosing meal so set the top label to this value
     
-    @IBOutlet weak var nutrientTableView: UITableView!
+    // Instantiate the FoodData class
+    private var foodData = FoodData()
+    
+//    @IBOutlet weak var nutrientTableView: UITableView!
     @IBOutlet weak var foodNameTextField: UITextField!
     @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var mealTypeLabel: UILabel!
     @IBOutlet weak var searchFood: UIButton!
     
+    @IBOutlet weak var caloriesLabel: UILabel!
+    @IBOutlet weak var proteinLabel: UILabel!
+    @IBOutlet weak var fatLabel: UILabel!
+    @IBOutlet weak var sugarLabel: UILabel!
+
     
-    struct Food: Codable {
-        let name: String
-        let calories: Double
-        let servingSizeG: Double
-        let fatTotalG: Double
-        let fatSaturatedG: Double
-        let proteinG: Double
-        let sodiumMg: Int
-        let potassiumMg: Int
-        let cholesterolMg: Int
-        let carbohydratesTotalG: Double
-        let fiberG: Double
-        let sugarG: Double
-    }
     
-    var foodItems: [Food] = []
+    var foodItems: [FoodItem] = []
+//
+//    let query1 = "3lb carrots and a chicken sandwich"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        nutrientTableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "caloriesCell")
+
         mealTypeLabel.text = mealType
-        nutrientTableView.dataSource = self
+//        nutrientTableView.delegate = self
+//        nutrientTableView.dataSource = self
         foodNameLabel.text = ""
+        self.caloriesLabel.text = ""
+        self.proteinLabel.text = ""
+        self.fatLabel.text = ""
+        self.sugarLabel.text = ""
     }
     
     @IBAction func findFoodButtonTapped(_ sender: Any) {
+        print("I have been searched.")
         guard let foodName = foodNameTextField.text else { return }
         foodNameLabel.text = "\(foodName) Nutritional Information"
-        fetchFood(for: foodName) { [weak self] data in
-            DispatchQueue.main.async {
-                if let data = data {
-                    self?.foodItems.append(data)
-                    self?.nutrientTableView.reloadData()
-                } else {
-                    // Handle error case
-                }
-            }
-        }
+        fetchFood(query:foodName)
+        // Set text area to an empty string
+        foodNameTextField.text = ""
     }
     
+    func calculateTotals() -> TotalFoodItem {
+        var totalCalories = 0.0
+        var totalFatTotalG = 0.0
+        var totalProteinG = 0.0
+        var totalSugarG = 0.0
+
+        for foodItem in foodItems {
+            totalCalories += foodItem.calories
+            totalFatTotalG += foodItem.fatTotalG
+            totalProteinG += foodItem.proteinG
+            totalSugarG += foodItem.sugarG
+        }
+
+        return TotalFoodItem(
+            totalCalories: Double(String(format: "%.1f", totalCalories)) ?? totalCalories,
+            totalFatTotalG: Double(String(format: "%.1f", totalFatTotalG)) ?? totalFatTotalG,
+            totalProteinG: Double(String(format: "%.1f", totalProteinG)) ?? totalProteinG,
+            totalSugarG: Double(String(format: "%.1f", totalSugarG)) ?? totalSugarG
+        )
+    }
+
+
+    
     // Api call to find the food and calories using struct
-    func fetchFood(for food: String, completion: @escaping (Food?) -> Void) {
-        guard let query = food.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+    func fetchFood(query: String) {
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         let url = URL(string: "https://api.calorieninjas.com/v1/nutrition?query=" + query)!
         var request = URLRequest(url: url)
         request.setValue("eHLXvaQ8P8N40UMSrZh85A==78XyI3BrPnl7SE6n", forHTTPHeaderField: "X-Api-Key")
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 print("Error with the request: \(error)")
-                completion(nil)
                 return
             }
             guard let data = data else {
                 print("No data returned from the request.")
-                completion(nil)
                 return
             }
             do {
@@ -80,28 +127,34 @@ class addCaloriesViewController: UIViewController {
                     print("JSON successfully parsed.")
                     if let items = json["items"] as? [[String: Any]] {
                         print("\"items\" array successfully extracted from JSON.")
-                        var foodItems = [Food]()
+                        var newFoodItems = [FoodItem]()
                         for item in items {
-                            let foodItem = Food(
+                            let foodItem = FoodItem(
                                 name: item["name"] as? String ?? "",
                                 calories: item["calories"] as? Double ?? 0.0,
-                                servingSizeG: item["serving_size_g"] as? Double ?? 0.0,
+//                                servingSizeG: item["serving_size_g"] as? Double ?? 0.0,
                                 fatTotalG: item["fat_total_g"] as? Double ?? 0.0,
-                                fatSaturatedG: item["fat_saturated_g"] as? Double ?? 0.0,
+//                                fatSaturatedG: item["fat_saturated_g"] as? Double ?? 0.0,
                                 proteinG: item["protein_g"] as? Double ?? 0.0,
-                                sodiumMg: item["sodium_mg"] as? Int ?? 0,
-                                potassiumMg: item["potassium_mg"] as? Int ?? 0,
-                                cholesterolMg: item["cholesterol_mg"] as? Int ?? 0,
-                                carbohydratesTotalG: item["carbohydrates_total_g"] as? Double ?? 0.0,
-                                fiberG: item["fiber_g"] as? Double ?? 0.0,
+//                                sodiumMg: item["sodium_mg"] as? Int ?? 0,
+//                                potassiumMg: item["potassium_mg"] as? Int ?? 0,
+//                                cholesterolMg: item["cholesterol_mg"] as? Int ?? 0,
+//                                carbohydratesTotalG: item["carbohydrates_total_g"] as? Double ?? 0.0,
+//                                fiberG: item["fiber_g"] as? Double ?? 0.0,
                                 sugarG: item["sugar_g"] as? Double ?? 0.0
                             )
-                            foodItems.append(foodItem)
+                            newFoodItems.append(foodItem)
                         }
-                        // Printing details of each food item.
-                        for foodItem in foodItems {
-                            print("Food Name: \(foodItem.name)")
-                            print("Calories: \(foodItem.calories)")
+
+                        DispatchQueue.main.async {
+                            self.foodItems = newFoodItems
+//                            self.nutrientTableView.reloadData()
+
+                            let total = self.calculateTotals()
+                            self.caloriesLabel.text = "\(total.totalCalories)"
+                            self.proteinLabel.text = "\(total.totalProteinG)"
+                            self.fatLabel.text = "\(total.totalFatTotalG)"
+                            self.sugarLabel.text = "\(total.totalSugarG)"
                         }
                     } else {
                         print("Unable to extract \"items\" array from JSON.")
@@ -111,23 +164,10 @@ class addCaloriesViewController: UIViewController {
                 }
             } catch {
                 print("Error decoding JSON: \(error)")
-                completion(nil)
             }
         }
         task.resume()
     }
 }
 
-extension addCaloriesViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foodItems.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FoodCell", for: indexPath)
-        let food = foodItems[indexPath.row]
-        cell.textLabel?.text = food.name
-        cell.detailTextLabel?.text = "Calories: \(food.calories), Proteins: \(food.proteinG), Fat: \(food.fatTotalG), Sugars: \(food.sugarG)"
-        return cell
-    }
-}
+
