@@ -14,8 +14,8 @@
             filePath = "calCounter/Control/addCaloriesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "fetchFood(query:)"
             landmarkType = "7">
          </BreakpointContent>

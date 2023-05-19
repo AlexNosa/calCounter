@@ -16,6 +16,7 @@ struct TotalFoodItem: Codable {
     let totalFatTotalG: Double
     let totalProteinG: Double
     let totalSugarG: Double
+    var finalFoodName: String?
 }
 
 struct FoodItem: Codable {
@@ -49,11 +50,14 @@ class addCaloriesViewController: UIViewController {
     @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var mealTypeLabel: UILabel!
     @IBOutlet weak var searchFood: UIButton!
+    @IBOutlet weak var servings: UITextField!
     
     @IBOutlet weak var caloriesLabel: UILabel!
     @IBOutlet weak var proteinLabel: UILabel!
     @IBOutlet weak var fatLabel: UILabel!
     @IBOutlet weak var sugarLabel: UILabel!
+    
+    @IBOutlet weak var addCaloriesButton: UIButton!
 
     
     
@@ -78,7 +82,7 @@ class addCaloriesViewController: UIViewController {
     @IBAction func findFoodButtonTapped(_ sender: Any) {
         print("I have been searched.")
         guard let foodName = foodNameTextField.text else { return }
-        foodNameLabel.text = "\(foodName) Nutritional Information"
+        foodNameLabel.text = "\(foodName)"
         fetchFood(query:foodName)
         // Set text area to an empty string
         foodNameTextField.text = ""
@@ -101,7 +105,8 @@ class addCaloriesViewController: UIViewController {
             totalCalories: Double(String(format: "%.1f", totalCalories)) ?? totalCalories,
             totalFatTotalG: Double(String(format: "%.1f", totalFatTotalG)) ?? totalFatTotalG,
             totalProteinG: Double(String(format: "%.1f", totalProteinG)) ?? totalProteinG,
-            totalSugarG: Double(String(format: "%.1f", totalSugarG)) ?? totalSugarG
+            totalSugarG: Double(String(format: "%.1f", totalSugarG)) ?? totalSugarG,
+            finalFoodName: self.foodNameLabel.text
         )
     }
 
@@ -168,6 +173,43 @@ class addCaloriesViewController: UIViewController {
         }
         task.resume()
     }
+    
+    @IBAction func addCaloriesButtonTapped(_ sender: UIButton) {
+        let total = calculateTotals()
+        guard let servingsText = servings.text, let servingsValue = Double(servingsText) else { return }
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let dashBoardVC = storyboard.instantiateViewController(identifier: "dashBoardViewController") as! dashBoardViewController
+
+        dashBoardVC.foodName = total.finalFoodName
+        dashBoardVC.servings = servingsValue
+        dashBoardVC.calories = total.totalCalories*servingsValue
+        dashBoardVC.protein = total.totalProteinG
+        dashBoardVC.fat = total.totalFatTotalG
+        dashBoardVC.sugar = total.totalSugarG
+
+        self.navigationController?.pushViewController(dashBoardVC, animated: true)
+    }
+
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToDashBoardViewController", let nextVC = segue.destination as?
+        dashBoardViewController {
+
+            let total = calculateTotals()
+
+            guard let servingsText = servings.text, let servingsValue = Double(servingsText) else { return }
+
+            // Pass the values
+            nextVC.foodName = total.finalFoodName
+            nextVC.servings = servingsValue
+            nextVC.calories = total.totalCalories*servingsValue
+            nextVC.protein = total.totalProteinG
+            nextVC.fat = total.totalFatTotalG
+            nextVC.sugar = total.totalSugarG
+        }
+    }
+
 }
 
 

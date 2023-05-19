@@ -363,6 +363,9 @@
                                     <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="20"/>
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="addCaloriesButtonTapped:" destination="WRI-TG-x9a" eventType="primaryActionTriggered" id="71K-yA-L9b"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Food" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Rz-wg-rd1">
                                 <rect key="frame" x="30" y="205" width="191" height="34"/>
@@ -381,7 +384,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. 3" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ivT-wH-Bcd">
                                 <rect key="frame" x="218" y="584" width="142" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -476,6 +479,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="krR-YX-57l"/>
                     <connections>
+                        <outlet property="addCaloriesButton" destination="5hh-oy-Lyr" id="xOf-tt-40I"/>
                         <outlet property="caloriesLabel" destination="RSM-7q-vx7" id="fgC-Ez-iLo"/>
                         <outlet property="fatLabel" destination="CIK-zO-InU" id="b0l-ci-v2O"/>
                         <outlet property="foodNameLabel" destination="KNg-JI-CbH" id="bpo-WV-x6a"/>
@@ -483,6 +487,7 @@
                         <outlet property="mealTypeLabel" destination="fb1-4E-SAH" id="yTw-R6-D6M"/>
                         <outlet property="proteinLabel" destination="nxU-0D-yfF" id="Kr0-9u-SmR"/>
                         <outlet property="searchFood" destination="Zra-pc-JXS" id="jur-ed-Cov"/>
+                        <outlet property="servings" destination="ivT-wH-Bcd" id="5O5-Nv-BFd"/>
                         <outlet property="sugarLabel" destination="SZb-7r-ksc" id="uaP-l5-XZ9"/>
                     </connections>
                 </viewController>
