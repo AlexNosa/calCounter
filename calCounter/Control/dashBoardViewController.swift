@@ -20,19 +20,34 @@ class dashBoardViewController: UIViewController {
     var height:Double = 0.0
     var age:Int = 0
     var gender:Int = 0
-    var currentCalories:Int = 1000
-    var goalCalories: Int = 0
+    var currentCalories:Double? = 0
+    var goalCalories: Double = 0
     var percentageCompleted: Int = 0
     let donutLayer = CAShapeLayer()
+
+    var servings: Double?
+    var calories: Double?
+    var protein: Double?
+    var fat: Double?
+    var sugar: Double?
+    var foodName: String?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         calcGoalCalories()
+        
+        if let caloriesToAdd = calories {
+              currentCalories = (currentCalories ?? 0) + caloriesToAdd
+          }
+        
         let percentageCompleted = calcRemainingPct()
         goalCaloriesTxt.text = String(goalCalories)
-        currentCaloriesTxt.text = String(currentCalories)
+        currentCaloriesTxt.text = String(currentCalories ?? 0.0)
         remainingCalPctTxt.text = String(percentageCompleted) + "%"
         createGraph()
+        
+
     }
     
     func calcGoalCalories(){
@@ -44,10 +59,11 @@ class dashBoardViewController: UIViewController {
     }
     
     func calcRemainingPct() -> Int {
-        let remainingCalories = max(goalCalories - currentCalories, 0)
-        percentageCompleted = 100 - Int(Double(remainingCalories) / Double(goalCalories) * 100)
+        let remainingCalories = max(goalCalories - (currentCalories ?? 0.0), 0)
+        percentageCompleted = 100 - Int((remainingCalories / goalCalories) * 100)
         return percentageCompleted
     }
+
     
     func createGraph(){
         let centerPoint = CGPoint(x: donutGraph.bounds.midX, y: donutGraph.bounds.midY)
