@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4ACE28AD2A08D060004E7D06 /* ApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE28AC2A08D060004E7D06 /* ApiController.swift */; };
 		E34D35D829FE18BC00F42E58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35D729FE18BC00F42E58 /* AppDelegate.swift */; };
 		E34D35DA29FE18BC00F42E58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35D929FE18BC00F42E58 /* SceneDelegate.swift */; };
 		E34D35DC29FE18BC00F42E58 /* dashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D35DB29FE18BC00F42E58 /* dashBoardViewController.swift */; };
@@ -22,7 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4ACE28AC2A08D060004E7D06 /* ApiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiController.swift; sourceTree = "<group>"; };
 		E34D35D429FE18BC00F42E58 /* calCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E34D35D729FE18BC00F42E58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E34D35D929FE18BC00F42E58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 				E34D35F029FE2D9400F42E58 /* chooseMealViewController.swift */,
 				E34D35F229FE2DBC00F42E58 /* mealHistoryViewController.swift */,
 				E34D35F429FE2DD500F42E58 /* settingViewController.swift */,
-				4ACE28AC2A08D060004E7D06 /* ApiController.swift */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -188,7 +185,6 @@
 				E34D35F529FE2DD500F42E58 /* settingViewController.swift in Sources */,
 				E34D35D829FE18BC00F42E58 /* AppDelegate.swift in Sources */,
 				E34D35DA29FE18BC00F42E58 /* SceneDelegate.swift in Sources */,
-				4ACE28AD2A08D060004E7D06 /* ApiController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
