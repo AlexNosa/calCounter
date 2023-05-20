@@ -16,6 +16,7 @@ class BMRCalc{
     var gender:Int = 0
     
     func calculateBMR() -> Double {
+
         var bmr = 0.0
         var weightCalc = 0.0
         var heightCalc = 0.0
@@ -36,5 +37,6 @@ class BMRCalc{
             bmr = 88.362 + weightCalc + heightCalc - ageCalc
         }
         return Double(bmr)
+        
     }
 }

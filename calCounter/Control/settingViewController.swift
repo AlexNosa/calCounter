@@ -33,6 +33,8 @@ class settingViewController: UIViewController {
             VC.height = Double(heightTxtField.text!) ?? 0.0
             VC.age = Int(ageTxtField.text!) ?? 0
             VC.gender = genderSelectButton.selectedSegmentIndex
+            
+            VC.navigationItem.setHidesBackButton(true, animated: true)
         }
     }
     
@@ -47,4 +49,5 @@ class settingViewController: UIViewController {
         defaults.set(heightTxtField.text, forKey: "height")
         defaults.synchronize()
     }
+    // Hide the back button
 }

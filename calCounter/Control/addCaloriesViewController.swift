@@ -7,6 +7,7 @@
 import Foundation
 import UIKit
 
+
 // Declare a class that conforms to the ObservableObject protocol
 class FoodData: ObservableObject {
     @Published var foodItems: [FoodItem] = []
@@ -22,15 +23,8 @@ struct TotalFoodItem: Codable {
 struct FoodItem: Codable {
     let name: String
     let calories: Double
-//    let servingSizeG: Double
     let fatTotalG: Double
-//    let fatSaturatedG: Double
     let proteinG: Double
-//    let sodiumMg: Int
-//    let potassiumMg: Int
-//    let cholesterolMg: Int
-//    let carbohydratesTotalG: Double
-//    let fiberG: Double
     let sugarG: Double
 }
 struct ApiResponse: Codable {
@@ -57,20 +51,19 @@ class addCaloriesViewController: UIViewController {
     @IBOutlet weak var sugarLabel: UILabel!
     
     @IBOutlet weak var addCaloriesButton: UIButton!
-
+    
+    var totalCalories =  0.0
+    var totalFatTotalG = 0.0
+    var totalProteinG  = 0.0
+    var totalSugarG = 0.0
     
     
     var foodItems: [FoodItem] = []
-//
-//    let query1 = "3lb carrots and a chicken sandwich"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        nutrientTableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "caloriesCell")
-
+        
         mealTypeLabel.text = mealType
-//        nutrientTableView.delegate = self
-//        nutrientTableView.dataSource = self
         foodNameLabel.text = ""
         self.caloriesLabel.text = ""
         self.proteinLabel.text = ""
@@ -88,18 +81,14 @@ class addCaloriesViewController: UIViewController {
     }
     
     func calculateTotals() -> TotalFoodItem {
-        var totalCalories = 0.0
-        var totalFatTotalG = 0.0
-        var totalProteinG = 0.0
-        var totalSugarG = 0.0
-
+        
         for foodItem in foodItems {
             totalCalories += foodItem.calories
             totalFatTotalG += foodItem.fatTotalG
             totalProteinG += foodItem.proteinG
             totalSugarG += foodItem.sugarG
         }
-
+        
         return TotalFoodItem(
             totalCalories: Double(String(format: "%.1f", totalCalories)) ?? totalCalories,
             totalFatTotalG: Double(String(format: "%.1f", totalFatTotalG)) ?? totalFatTotalG,
@@ -108,8 +97,8 @@ class addCaloriesViewController: UIViewController {
             finalFoodName: self.foodNameLabel.text
         )
     }
-
-
+    
+    
     
     // Api call to find the food and calories using struct
     func fetchFood(query: String) {
@@ -136,24 +125,16 @@ class addCaloriesViewController: UIViewController {
                             let foodItem = FoodItem(
                                 name: item["name"] as? String ?? "",
                                 calories: item["calories"] as? Double ?? 0.0,
-//                                servingSizeG: item["serving_size_g"] as? Double ?? 0.0,
                                 fatTotalG: item["fat_total_g"] as? Double ?? 0.0,
-//                                fatSaturatedG: item["fat_saturated_g"] as? Double ?? 0.0,
                                 proteinG: item["protein_g"] as? Double ?? 0.0,
-//                                sodiumMg: item["sodium_mg"] as? Int ?? 0,
-//                                potassiumMg: item["potassium_mg"] as? Int ?? 0,
-//                                cholesterolMg: item["cholesterol_mg"] as? Int ?? 0,
-//                                carbohydratesTotalG: item["carbohydrates_total_g"] as? Double ?? 0.0,
-//                                fiberG: item["fiber_g"] as? Double ?? 0.0,
                                 sugarG: item["sugar_g"] as? Double ?? 0.0
                             )
                             newFoodItems.append(foodItem)
                         }
-
+                        
                         DispatchQueue.main.async {
                             self.foodItems = newFoodItems
-//                            self.nutrientTableView.reloadData()
-
+                            
                             let total = self.calculateTotals()
                             self.caloriesLabel.text = "\(total.totalCalories)"
                             self.proteinLabel.text = "\(total.totalProteinG)"
@@ -174,50 +155,27 @@ class addCaloriesViewController: UIViewController {
     }
     
     @IBAction func addCaloriesButtonTapped(_ sender: UIButton) {
-        let total = calculateTotals()
-        guard let servingsText = servings.text, let servingsValue = Double(servingsText) else { return }
+        let foodName = foodNameLabel.text ?? ""
+        let caloriesString = String(totalCalories)
+        let calories = Double(caloriesString) ?? 0.0
         
-        let meal = Meal(
-            foodName: total.finalFoodName ?? "",
-            mealType: mealTypeLabel.text ?? "",
-            calories: total.totalCalories * servingsValue
-            )
-        
-        MealHistory.shared.addMeal(meal)
-
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let dashBoardVC = storyboard.instantiateViewController(identifier: "dashBoardViewController") as! dashBoardViewController
-
-        dashBoardVC.foodName = total.finalFoodName
-        dashBoardVC.servings = servingsValue
-        dashBoardVC.calories = total.totalCalories*servingsValue
-        dashBoardVC.protein = total.totalProteinG
-        dashBoardVC.fat = total.totalFatTotalG
-        dashBoardVC.sugar = total.totalSugarG
-
-        self.navigationController?.pushViewController(dashBoardVC, animated: true)
+        let dashboardVC = storyboard.instantiateViewController(withIdentifier: "dashBoardViewController") as! dashBoardViewController
+        dashboardVC.addFoodEntry(foodName: foodName, calories: Int(calories))
+        
+        // Push the DashboardViewController onto the navigation stack
+        navigationController?.pushViewController(dashboardVC, animated: true)
+        
+        // Hide the back button
+        dashboardVC.navigationItem.setHidesBackButton(true, animated: true)
     }
-
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let total = calculateTotals()
-        guard let servingsText = servings.text, let servingsValue = Double(servingsText) else { return }
-
-        if segue.identifier == "segueToDashBoardViewController", let nextVC = segue.destination as? dashBoardViewController {
-            nextVC.foodName = total.finalFoodName
-            nextVC.servings = servingsValue
-            nextVC.calories = total.totalCalories*servingsValue
-            nextVC.protein = total.totalProteinG
-            nextVC.fat = total.totalFatTotalG
-            nextVC.sugar = total.totalSugarG
-        } else if segue.identifier == "segueToMealHistoryViewController", let nextVC = segue.destination as? mealHistoryViewController {
-            nextVC.foodName = total.finalFoodName
-            nextVC.mealType = mealTypeLabel.text
-            nextVC.calories = total.totalCalories*servingsValue
-        }
-    }
-
-
 }
+
+
+
+
+
+
+
 
 

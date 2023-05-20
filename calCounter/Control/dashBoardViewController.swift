@@ -5,11 +5,21 @@
 //  Created by Alex Nosatti on 30/4/2023.
 //
 
+
 import Foundation
 import UIKit
 
+
+struct FoodEntry: Codable {
+    let foodName: String
+    let calories: Int
+}
+
+let KEY_FOOD_ENTRIES = "foodEntries"
+
 class dashBoardViewController: UIViewController {
-    
+
+
     @IBOutlet weak var goalCaloriesTxt: UILabel!
     @IBOutlet weak var currentCaloriesTxt: UILabel!
     @IBOutlet weak var remainingCalPctTxt: UILabel!
@@ -24,37 +34,38 @@ class dashBoardViewController: UIViewController {
     var goalCalories: Double = 0
     var percentageCompleted: Int = 0
     let donutLayer = CAShapeLayer()
-
-    var servings: Double?
-    var calories: Double?
-    var protein: Double?
-    var fat: Double?
-    var sugar: Double?
-    var foodName: String?
-
+    var newFoodName:String = ""
+    var newMealType:String = ""
+    var newCalories:Double? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         calcGoalCalories()
-        
-        if let caloriesToAdd = calories {
-              currentCalories = (currentCalories ?? 0) + caloriesToAdd
-          }
+        calculateCurrentCalories()
         
         let percentageCompleted = calcRemainingPct()
         goalCaloriesTxt.text = String(goalCalories)
         currentCaloriesTxt.text = String(currentCalories ?? 0.0)
         remainingCalPctTxt.text = String(percentageCompleted) + "%"
         createGraph()
-        
-
     }
     
     func calcGoalCalories(){
-        bmrCalc.weightInKilograms = weight
-        bmrCalc.heightInCM = height
-        bmrCalc.ageInYears = age
+        
+        let defaults = UserDefaults.standard
+        
+        // Retrieve the values from UserDefaults
+        let name = defaults.string(forKey: "name")
+        let gender = defaults.integer(forKey: "gender")
+        let age = defaults.string(forKey: "age")
+        let weight = defaults.string(forKey: "weight")
+        let height = defaults.string(forKey: "height")
+        
+        bmrCalc.weightInKilograms = Double(weight ?? "0.0") ?? 0.0
+        bmrCalc.heightInCM = Double(height ?? "0.0") ?? 0.0
+        bmrCalc.ageInYears = Int(age ?? "0") ?? 0
         bmrCalc.gender = gender
+                
         goalCalories = bmrCalc.calculateBMR()
     }
     
@@ -63,11 +74,44 @@ class dashBoardViewController: UIViewController {
         percentageCompleted = 100 - Int((remainingCalories / goalCalories) * 100)
         return percentageCompleted
     }
-
+    
+    func addFoodEntry(foodName: String, calories: Int) {
+            let defaults = UserDefaults.standard
+            
+            var currentEntries = readFoodEntries()
+            currentEntries.append(FoodEntry(foodName: foodName, calories: calories))
+            
+            if let encodedData = try? JSONEncoder().encode(currentEntries) {
+                defaults.set(encodedData, forKey: KEY_FOOD_ENTRIES)
+            }
+        }
+    
+    func readFoodEntries() -> [FoodEntry] {
+        let defaults = UserDefaults.standard
+            
+        if let savedData = defaults.data(forKey: KEY_FOOD_ENTRIES),
+            let foodEntries = try? JSONDecoder().decode([FoodEntry].self, from: savedData) {
+            return foodEntries
+        }
+        return []
+    }
+    
+    func calculateCurrentCalories() {
+        let foodEntries = readFoodEntries()
+        print(foodEntries);
+        var totalCalories = 0
+        
+        for entry in foodEntries {
+            totalCalories += entry.calories
+        }
+        
+        currentCalories = Double(totalCalories)
+        currentCaloriesTxt.text = String(currentCalories ?? 0.0)
+    }
     
     func createGraph(){
         let centerPoint = CGPoint(x: donutGraph.bounds.midX, y: donutGraph.bounds.midY)
-        let radius = donutGraph.bounds.width / 2
+        let radius = donutGraph.bounds.width / 3
         let lineWidth: CGFloat = 50
         let donutPath = UIBezierPath(
             arcCenter: centerPoint,
@@ -102,4 +146,3 @@ class dashBoardViewController: UIViewController {
         updateDonut()
     }
 }
-
