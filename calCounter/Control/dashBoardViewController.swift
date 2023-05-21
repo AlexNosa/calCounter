@@ -140,6 +140,17 @@ class dashBoardViewController: UIViewController {
         animation.isRemovedOnCompletion = false
         donutLayer.add(animation, forKey: "progress")
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mealHistorySegue"{
+            let VC = segue.destination as! mealHistoryViewController
+            let currentFoodEntries = readFoodEntries()
+            for food in currentFoodEntries{
+                VC.mealHistory.append(meal(foodName: food.foodName, calorieCount: food.calories ))
+            }
+            
+        }
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
