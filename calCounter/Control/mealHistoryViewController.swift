@@ -11,14 +11,20 @@ struct meal{
     var foodName:String
     var calorieCount:Int
 }
-class mealHistoryViewController : UIViewController {
+class mealHistoryViewController : UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var mealHistoryTableView: UITableView!
     var mealHistory = [meal]()
     // You can also implement other delegate methods based on your needs.
-}
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-extension  mealHistoryViewController:UITableViewDelegate {
+        mealHistoryTableView.delegate = self
+        mealHistoryTableView.dataSource = self
+
+        mealHistoryTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    }
+
     
 }
 
@@ -29,18 +35,14 @@ extension mealHistoryViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
-        if indexPath.row == 0 {
-            // Set the column titles for the first row
-            cell.textLabel?.text = "Food Name"
-            cell.detailTextLabel?.text = "Calorie Count"
-        } else {
-            // Display the meal history data for other rows
-            let food = mealHistory[indexPath.row - 1]
-            cell.textLabel?.text = food.foodName
-            cell.detailTextLabel?.text = String(food.calorieCount)
-        }
-
+        let food = mealHistory[indexPath.row]
+        cell.textLabel?.text = food.foodName
+        cell.detailTextLabel?.text = String(food.calorieCount)
         return cell
     }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Food: \t Calories:"
+    }
+
+
 }
