@@ -31,7 +31,7 @@ struct ApiResponse: Codable {
     let items: [FoodItem]
 }
 
-class addCaloriesViewController: UIViewController {
+class addCaloriesViewController: UIViewController , UITextFieldDelegate {
     
     var mealType: String?
     //this is the segue from choosing meal so set the top label to this value
@@ -63,14 +63,37 @@ class addCaloriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mealTypeLabel.text = mealType
         foodNameLabel.text = ""
         self.caloriesLabel.text = ""
         self.proteinLabel.text = ""
         self.fatLabel.text = ""
         self.sugarLabel.text = ""
+        servings.delegate = self
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        if textField == servings {
+
+            let allowedCharacters = CharacterSet(charactersIn: "0123456789.")
+            let characterSet = CharacterSet(charactersIn: string)
+            
+            let countDots = textField.text!.components(separatedBy: ".").count - 1
+            let isDot = string.components(separatedBy: ".").count - 1
+            
+            if countDots > 0 && isDot > 0 {
+                return false
+            }
+            
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
+        else {
+            return true
+        }
+    }
+
+
     
     @IBAction func findFoodButtonTapped(_ sender: Any) {
         print("I have been searched.")
