@@ -29,9 +29,18 @@ extension mealHistoryViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let food = mealHistory[indexPath.row]
-        cell.textLabel?.text = food.foodName
-        cell.detailTextLabel?.text = String(food.calorieCount)
+
+        if indexPath.row == 0 {
+            // Set the column titles for the first row
+            cell.textLabel?.text = "Food Name"
+            cell.detailTextLabel?.text = "Calorie Count"
+        } else {
+            // Display the meal history data for other rows
+            let food = mealHistory[indexPath.row - 1]
+            cell.textLabel?.text = food.foodName
+            cell.detailTextLabel?.text = String(food.calorieCount)
+        }
+
         return cell
     }
 }

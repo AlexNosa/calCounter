@@ -5,7 +5,6 @@
 //  Created by Alex Nosatti on 30/4/2023.
 //
 
-
 import Foundation
 import UIKit
 
@@ -44,9 +43,9 @@ class dashBoardViewController: UIViewController {
         calculateCurrentCalories()
         
         let percentageCompleted = calcRemainingPct()
-        goalCaloriesTxt.text = String(goalCalories)
-        currentCaloriesTxt.text = String(currentCalories ?? 0.0)
-        remainingCalPctTxt.text = String(percentageCompleted) + "%"
+        goalCaloriesTxt.text = String(Int(goalCalories))
+        currentCaloriesTxt.text = String(Int(currentCalories ?? 0.0))
+        remainingCalPctTxt.text = String(percentageCompleted) + "% completed"
         createGraph()
     }
     
@@ -76,15 +75,14 @@ class dashBoardViewController: UIViewController {
     }
     
     func addFoodEntry(foodName: String, calories: Int) {
-            let defaults = UserDefaults.standard
+        let defaults = UserDefaults.standard
+        var currentEntries = readFoodEntries()
+        currentEntries.append(FoodEntry(foodName: foodName, calories: calories))
             
-            var currentEntries = readFoodEntries()
-            currentEntries.append(FoodEntry(foodName: foodName, calories: calories))
-            
-            if let encodedData = try? JSONEncoder().encode(currentEntries) {
-                defaults.set(encodedData, forKey: KEY_FOOD_ENTRIES)
-            }
+        if let encodedData = try? JSONEncoder().encode(currentEntries) {
+            defaults.set(encodedData, forKey: KEY_FOOD_ENTRIES)
         }
+    }
     
     func readFoodEntries() -> [FoodEntry] {
         let defaults = UserDefaults.standard
@@ -154,6 +152,11 @@ class dashBoardViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateDonut()
+        // Recalculate goal calories and update UI
+                calcGoalCalories()
+                goalCaloriesTxt.text = String(Int(goalCalories))
+                let percentageCompleted = calcRemainingPct()
+                remainingCalPctTxt.text = String(percentageCompleted) + "% completed"
+                updateDonut()
     }
 }

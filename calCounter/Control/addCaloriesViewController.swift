@@ -56,6 +56,7 @@ class addCaloriesViewController: UIViewController {
     var totalFatTotalG = 0.0
     var totalProteinG  = 0.0
     var totalSugarG = 0.0
+
     
     
     var foodItems: [FoodItem] = []
@@ -155,9 +156,10 @@ class addCaloriesViewController: UIViewController {
     }
     
     @IBAction func addCaloriesButtonTapped(_ sender: UIButton) {
+        guard let servingsText = servings.text, let servingsValue = Double(servingsText) else { return }
         let foodName = foodNameLabel.text ?? ""
         let caloriesString = String(totalCalories)
-        let calories = Double(caloriesString) ?? 0.0
+        let calories = (Double(caloriesString) ?? 0.0) * servingsValue
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let dashboardVC = storyboard.instantiateViewController(withIdentifier: "dashBoardViewController") as! dashBoardViewController
