@@ -36,6 +36,7 @@ class dashBoardViewController: UIViewController {
     var newFoodName:String = ""
     var newMealType:String = ""
     var newCalories:Double? = 0
+    var lastResetDate: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +96,7 @@ class dashBoardViewController: UIViewController {
     }
     
     func calculateCurrentCalories() {
+        resetCurrentCaloriesIfNeeded()
         let foodEntries = readFoodEntries()
         print(foodEntries);
         var totalCalories = 0
@@ -105,6 +107,22 @@ class dashBoardViewController: UIViewController {
         
         currentCalories = Double(totalCalories)
         currentCaloriesTxt.text = String(currentCalories ?? 0.0)
+    }
+    
+    func resetCurrentCaloriesIfNeeded() {
+        guard let lastResetDate = lastResetDate else { return }
+        
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: lastResetDate, to: currentDate)
+        
+        if let daysSinceReset = components.day, daysSinceReset >= 1 {
+            // Reset the current calorie count
+            currentCalories = 0.0
+            
+            // Update the reset date to the current date
+            self.lastResetDate = currentDate
+        }
     }
     
     func createGraph(){

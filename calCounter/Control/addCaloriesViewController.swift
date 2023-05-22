@@ -61,25 +61,6 @@ class addCaloriesViewController: UIViewController {
     
     var foodItems: [FoodItem] = []
     
-    func resetCaloriesIfNeeded() {
-            guard let lastResetDate = lastResetDate else { return }
-            
-            let currentDate = Date()
-            let calendar = Calendar.current
-            let components = calendar.dateComponents([.day], from: lastResetDate, to: currentDate)
-            
-            if let daysSinceReset = components.day, daysSinceReset >= 1 {
-                // Reset the total calorie count
-                totalCalories = 0.0
-                totalFatTotalG = 0.0
-                totalProteinG = 0.0
-                totalSugarG = 0.0
-                
-                // Update the reset date to the current date
-                self.lastResetDate = currentDate
-            }
-        }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,7 +82,6 @@ class addCaloriesViewController: UIViewController {
     }
     
     func calculateTotals() -> TotalFoodItem {
-        resetCaloriesIfNeeded()
         
         for foodItem in foodItems {
             totalCalories += foodItem.calories
