@@ -98,7 +98,7 @@ class addCaloriesViewController: UIViewController , UITextFieldDelegate {
     @IBAction func findFoodButtonTapped(_ sender: Any) {
         print("I have been searched.")
         guard let foodName = foodNameTextField.text else { return }
-        foodNameLabel.text = "\(foodName)"
+        foodNameLabel.text = "\(foodName) Nutritional Information"
         fetchFood(query:foodName)
         // Set text area to an empty string
         foodNameTextField.text = ""
