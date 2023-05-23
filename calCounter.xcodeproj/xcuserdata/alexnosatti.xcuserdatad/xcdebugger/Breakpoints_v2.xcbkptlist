@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "98F1FE80-37C4-41AC-B53A-CD0D15BED19D"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3CAC4936-A53F-4F8A-836F-3780692A6A8C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "calCounter/Control/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A05BFEE5-84C4-4F6E-BA34-FF807AEF8A35"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "calCounter/Control/addCaloriesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "TotalFoodItem"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "A05BFEE5-84C4-4F6E-BA34-FF807AEF8A35 - 70a436415b6afcf2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "calCounter.addCaloriesViewController.mealTypeLabel.getter : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "calCounter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexnosatti/Desktop/%20/Uni/3rd%20Year/IT/IOS%20dev/CalCounter/calCounter/calCounter/Control/addCaloriesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "85">
+               </Location>
+               <Location
+                  uuid = "A05BFEE5-84C4-4F6E-BA34-FF807AEF8A35 - d4cb383e495018ce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "calCounter.addCaloriesViewController.mealTypeLabel.setter : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "calCounter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexnosatti/Desktop/%20/Uni/3rd%20Year/IT/IOS%20dev/CalCounter/calCounter/calCounter/Control/addCaloriesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "A05BFEE5-84C4-4F6E-BA34-FF807AEF8A35 - 44a5321ae3417fd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "calCounter.addCaloriesViewController.mealTypeLabel.modify : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "calCounter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexnosatti/Desktop/%20/Uni/3rd%20Year/IT/IOS%20dev/CalCounter/calCounter/calCounter/Control/addCaloriesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "A05BFEE5-84C4-4F6E-BA34-FF807AEF8A35 - 1cf4ba2ca7abac22"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "calCounter.addCaloriesViewController.mealTypeLabel.modify : Swift.Optional&lt;__C.UILabel&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "calCounter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexnosatti/Desktop/%20/Uni/3rd%20Year/IT/IOS%20dev/CalCounter/calCounter/calCounter/Control/addCaloriesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "A05BFEE5-84C4-4F6E-BA34-FF807AEF8A35 - 84f7b0b38dcc59ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "calCounter.addCaloriesViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; calCounter.addCaloriesViewController"
+                  moduleName = "calCounter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexnosatti/Desktop/%20/Uni/3rd%20Year/IT/IOS%20dev/CalCounter/calCounter/calCounter/Control/addCaloriesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "330">
+               </Location>
+               <Location
+                  uuid = "A05BFEE5-84C4-4F6E-BA34-FF807AEF8A35 - be2129048935bf13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "calCounter.addCaloriesViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;calCounter.addCaloriesViewController&gt;"
+                  moduleName = "calCounter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexnosatti/Desktop/%20/Uni/3rd%20Year/IT/IOS%20dev/CalCounter/calCounter/calCounter/Control/addCaloriesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "287">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
