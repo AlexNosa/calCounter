@@ -29,19 +29,16 @@ class settingViewController: UIViewController {
         navigationItem.setHidesBackButton(true, animated: false)
     }
     
-    
-    @IBAction func saveButtonTapped(_ sender: UIButton) {
-        guard let name = nameTxtField.text, !name.isEmpty,
-              let ageText = ageTxtField.text, !ageText.isEmpty,
-              let weightText = weightTextField.text, !weightText.isEmpty,
-              let heightText = heightTxtField.text, !heightText.isEmpty else {
-            displayError(message: "Please fill in all the required data.")
-            return
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "saveData" {
+            let defaults = UserDefaults.standard
+            defaults.set(nameTxtField.text, forKey: "name")
+            defaults.set(genderSelectButton.selectedSegmentIndex, forKey: "gender")
+            defaults.set(ageTxtField.text, forKey: "age")
+            defaults.set(weightTextField.text, forKey: "weight")
+            defaults.set(heightTxtField.text, forKey: "height")
+            defaults.synchronize()
+            
             guard let VC = segue.destination as? dashBoardViewController else {
                 displayError(message: "Failed to retrieve destination view controller.")
                 return
@@ -65,14 +62,6 @@ class settingViewController: UIViewController {
       
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-          
-        let defaults = UserDefaults.standard
-        defaults.set(nameTxtField.text, forKey: "name")
-        defaults.set(genderSelectButton.selectedSegmentIndex, forKey: "gender")
-        defaults.set(ageTxtField.text, forKey: "age")
-        defaults.set(weightTextField.text, forKey: "weight")
-        defaults.set(heightTxtField.text, forKey: "height")
-        defaults.synchronize()
     }
       
     func displayError(message: String) {
