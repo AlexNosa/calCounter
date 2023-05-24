@@ -18,15 +18,8 @@ class chooseMealViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         // Configure button title properties
         let buttonArray = [breakfastButton, lunchButton, dinnerButton, snackButton]
-        for button in buttonArray {
-            button?.setTitleColor(UIColor.white, for: .normal) // Change the text color
-            button?.titleLabel?.shadowColor = UIColor.black // Add a text shadow
-            button?.titleLabel?.shadowOffset = CGSize(width: -1, height: 1)
-            button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16) // Increase the font size
-        }
         
         // Set up button tags
         breakfastButton.tag = 1
@@ -55,32 +48,32 @@ class chooseMealViewController: UIViewController {
         }
         performSegue(withIdentifier: "segueToAddCaloriesVC", sender: self)
     }
-    
+    // send data to the addCaloriesViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToAddCaloriesVC" {
             let destinationVC = segue.destination as! addCaloriesViewController
             destinationVC.mealType = selectedMealType
         }
     }
-
+    // if breakfast button pressed....
     @IBAction func addBreakfast(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "addCaloriesViewController") as! addCaloriesViewController
         vc.mealType = "Breakfast"
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    // if lunch button pressed....
     @IBAction func addLunch(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "addCaloriesViewController") as! addCaloriesViewController
         vc.mealType = "Lunch"
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    // if dinner button pressed....
     @IBAction func addDinner(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "addCaloriesViewController") as! addCaloriesViewController
         vc.mealType = "Dinner"
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+    // if snack button pressed....
     @IBAction func addSnack(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "addCaloriesViewController") as! addCaloriesViewController
         vc.mealType = "Snacks"

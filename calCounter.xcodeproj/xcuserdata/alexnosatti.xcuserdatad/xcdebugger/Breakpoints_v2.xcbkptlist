@@ -30,10 +30,10 @@
             filePath = "calCounter/Control/addCaloriesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "TotalFoodItem"
-            landmarkType = "14">
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "finalFoodName"
+            landmarkType = "24">
             <Locations>
                <Location
                   uuid = "A05BFEE5-84C4-4F6E-BA34-FF807AEF8A35 - 70a436415b6afcf2"
