@@ -39,6 +39,8 @@ class dashBoardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkSettingsData()
         calcGoalCalories()
         calculateCurrentCalories()
         
@@ -49,12 +51,45 @@ class dashBoardViewController: UIViewController {
         createGraph()
     }
     
+    func checkSettingsData() {
+        let defaults = UserDefaults.standard
+        let name = defaults.string(forKey: "name")
+        let gender = defaults.integer(forKey: "gender")
+        let age = defaults.string(forKey: "age")
+        let weight = defaults.string(forKey: "weight")
+        let height = defaults.string(forKey: "height")
+        
+//        print("Name: \(name ?? "nil")")
+//        print("Gender: \(gender)")
+//        print("Age: \(age ?? "nil")")
+//        print("Weight: \(weight ?? "nil")")
+//        print("Height: \(height ?? "nil")")
+
+        // Check if all required settings data is present
+        let isMissingData = name == nil || age == nil || weight == nil || height == nil
+        
+        if isMissingData {
+            let alert = UIAlertController(title: "Missing Data", message: "Please fill in the required data in Settings.", preferredStyle: .alert)
+            
+            let goToSettingsAction = UIAlertAction(title: "Go to Settings", style: .default) { [weak self] _ in
+                self?.navigateToSettings()
+            }
+            alert.addAction(goToSettingsAction)
+            
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func navigateToSettings() {
+        performSegue(withIdentifier: "goToSettings", sender: nil)
+    }
+    
     func calcGoalCalories(){
         
         let defaults = UserDefaults.standard
         
         // Retrieve the values from UserDefaults
-        let name = defaults.string(forKey: "name")
+        _ = defaults.string(forKey: "name")
         let gender = defaults.integer(forKey: "gender")
         let age = defaults.string(forKey: "age")
         let weight = defaults.string(forKey: "weight")
@@ -73,7 +108,7 @@ class dashBoardViewController: UIViewController {
         percentageCompleted = 100 - Int((remainingCalories / goalCalories) * 100)
         return percentageCompleted
     }
-    //
+
     func addFoodEntry(foodName: String, calories: Int) {
         let defaults = UserDefaults.standard
         var currentEntries = readFoodEntries()
@@ -165,17 +200,16 @@ class dashBoardViewController: UIViewController {
             for food in currentFoodEntries{
                 VC.mealHistory.append(meal(foodName: food.foodName, calorieCount: food.calories ))
             }
-            
         }
     }
     //each time thsi controller is viewed, need to calcGoal calories, and calc remainingCalPct
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Recalculate goal calories and update UI
-                calcGoalCalories()
-                goalCaloriesTxt.text = String(Int(goalCalories))
-                let percentageCompleted = calcRemainingPct()
-                remainingCalPctTxt.text = String(percentageCompleted) + "% completed"
-                updateDonut()
+        calcGoalCalories()
+        goalCaloriesTxt.text = String(Int(goalCalories))
+        let percentageCompleted = calcRemainingPct()
+        remainingCalPctTxt.text = String(percentageCompleted) + "% completed"
+        updateDonut()
     }
 }

@@ -24,7 +24,22 @@ class settingViewController: UIViewController {
         ageTxtField.text = defaults.string(forKey: "age")
         weightTextField.text = defaults.string(forKey: "weight")
         heightTxtField.text = defaults.string(forKey: "height")
+        
+        // Hide the back button in the navigation bar
+        navigationItem.setHidesBackButton(true, animated: false)
     }
+    
+    
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        guard let name = nameTxtField.text, !name.isEmpty,
+              let ageText = ageTxtField.text, !ageText.isEmpty,
+              let weightText = weightTextField.text, !weightText.isEmpty,
+              let heightText = heightTxtField.text, !heightText.isEmpty else {
+            displayError(message: "Please fill in all the required data.")
+            return
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "saveData" {
             guard let VC = segue.destination as? dashBoardViewController else {
