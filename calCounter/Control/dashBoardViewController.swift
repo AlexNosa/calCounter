@@ -54,7 +54,7 @@ class dashBoardViewController: UIViewController {
     func checkSettingsData() {
         let defaults = UserDefaults.standard
         let name = defaults.string(forKey: "name")
-        let gender = defaults.integer(forKey: "gender")
+        _ = defaults.integer(forKey: "gender")
         let age = defaults.string(forKey: "age")
         let weight = defaults.string(forKey: "weight")
         let height = defaults.string(forKey: "height")
