@@ -58,12 +58,6 @@ class dashBoardViewController: UIViewController {
         let age = defaults.string(forKey: "age")
         let weight = defaults.string(forKey: "weight")
         let height = defaults.string(forKey: "height")
-        
-//        print("Name: \(name ?? "nil")")
-//        print("Gender: \(gender)")
-//        print("Age: \(age ?? "nil")")
-//        print("Weight: \(weight ?? "nil")")
-//        print("Height: \(height ?? "nil")")
 
         // Check if all required settings data is present
         let isMissingData = name == nil || age == nil || weight == nil || height == nil
